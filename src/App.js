@@ -5,12 +5,10 @@ import AboutPage from './pages/about';
 function App() {
   return (
     <Router>
-      <div className='App'>
-        <Routes>
-          <Route exact path='/' element={<IndexPage />} />
-          <Route path='/about' element={<AboutPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route exact path='/' element={<IndexPage />} />
+        <Route path='/about' element={<AboutPage />} />
+      </Routes>
     </Router>
   );
 }
