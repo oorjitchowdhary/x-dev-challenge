@@ -6,13 +6,6 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import woeids from "../utils/woeid";
 
-const getTrends = async (woeid) => {
-  await fetch('http://localhost:5000/api/trends?query=' + woeid)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error searching:', error));
-};
-
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
@@ -24,31 +17,38 @@ const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
+  const getTrends = async (woeid) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/trends?query=${woeid}`);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error searching:', error);
+    }
+  };
+
   const handleChange = (event) => {
     const { value } = event.target;
     setQuery(value);
 
-    // Check if the length of the query is at least 2 characters
     if (value.length >= 2) {
-      // Filter cities based on the current query
       const filteredCities = Object.entries(woeids).filter(([cityName, _]) =>
         cityName.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filteredCities);
     } else {
-      setSuggestions([]); // Clear suggestions if query length is less than 2
+      setSuggestions([]);
     }
   };
 
   const handleCityClick = (cityName, woeid) => {
-    setQuery(cityName); // Set the city name in the input field
+    setQuery(cityName);
     setSuggestions([]);
     getTrends(woeid);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Since we're using the city name directly, we need to find the WOEID based on the city name
     const woeid = woeids[query];
     getTrends(woeid);
     setQuery('');
@@ -56,7 +56,7 @@ const SearchBar = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+    <Box position="absolute" top={20} left="30%" transform="translateX(-50%)" zIndex={999}>
       <form onSubmit={handleSubmit}>
         <TextField
           type="text"
@@ -65,15 +65,15 @@ const SearchBar = () => {
           size="small"
           value={query}
           onChange={handleChange}
-          fullWidth={true}
+          fullWidth
           InputProps={{
             sx: {
               borderRadius: '20px',
               backgroundColor: '#f3f3f3',
-              width: '700px',
+              width: '40vw'
             },
             style: {
-              padding: '1px',
+              padding: '10px',
             },
           }}
         />
@@ -83,7 +83,7 @@ const SearchBar = () => {
           elevation={3}
           sx={{
             marginTop: '8px',
-            width: '675px',
+            width: '100%',
             borderRadius: '10px',
             overflow: 'hidden',
             backgroundColor: '#f9f9f9',
