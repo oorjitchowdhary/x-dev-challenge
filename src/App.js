@@ -44,6 +44,10 @@ const App = () => {
         )}
       </div>
       </div>
+      <Routes>
+        <Route exact path='/' element={<IndexPage />} />
+        <Route path='/about' element={<AboutPage />} />
+      </Routes>
     </Router>
   );
 };
