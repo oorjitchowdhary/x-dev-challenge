@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import woeids from "../utils/woeid";
 
 const getTrends = async (woeid) => {
-  await fetch('http://127.0.0.1:5000/api/trends?query=' + woeid)
+  await fetch('http://localhost:5000/api/trends?query=' + woeid)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error searching:', error));
@@ -60,18 +60,20 @@ const SearchBar = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           type="text"
-          label="Search..."
+          label="Search for a city"
           variant="outlined"
           size="small"
           value={query}
           onChange={handleChange}
+          fullWidth={true}
           InputProps={{
             sx: {
               borderRadius: '20px',
               backgroundColor: '#f3f3f3',
+              width: '700px',
             },
             style: {
-              padding: '10px',
+              padding: '1px',
             },
           }}
         />
@@ -81,7 +83,7 @@ const SearchBar = () => {
           elevation={3}
           sx={{
             marginTop: '8px',
-            width: '300px',
+            width: '675px',
             borderRadius: '10px',
             overflow: 'hidden',
             backgroundColor: '#f9f9f9',
