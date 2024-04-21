@@ -15,7 +15,7 @@ class SearchPage extends Component {
                           aria-controls='search-content'
                           id='search-header'
                         >
-                            <Typography variant='h4' style={{ fontWeight: 'bold' }}>Search</Typography>
+                            <Typography variant='h4' style={{ fontWeight: 'bold' }}>👀 Search</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <SearchBar />

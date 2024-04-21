@@ -13,7 +13,7 @@ class SentimentsPage extends Component {
                             aria-controls='sentiments-content'
                             id='sentiments-header'
                         >
-                            <Typography variant='h4' style={{ fontWeight: 'bold' }}>Sentiments</Typography>
+                            <Typography variant='h4' style={{ fontWeight: 'bold' }}>🫣 Sentiments</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography variant='h6'>Sentiments will be displayed here</Typography>
