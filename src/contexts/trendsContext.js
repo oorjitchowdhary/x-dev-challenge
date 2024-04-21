@@ -2,11 +2,8 @@ import React from "react";
 
 export const TrendsContext = React.createContext();
 
-const val = "Trends";
-
 export const TrendsProvider = ({ children }) => {
     const [trends, setTrends] = React.useState([]);
-    const [city, setCity] = React.useState("San Francisco, California"); // Default city is "San Francisco"
 
     const fetchTrends = async (woeid) => {
         await fetch(`http://127.0.0.1:5000/api/trends?query=${woeid}`)
@@ -17,8 +14,12 @@ export const TrendsProvider = ({ children }) => {
             });
     }
 
+    React.useEffect(() => {
+        fetchTrends(2487956); // Default woeid is 2487956 (San Francisco)
+    }, []);
+
     return (
-        <TrendsContext.Provider value={{ val, city, ...trends, fetchTrends }}>
+        <TrendsContext.Provider value={{ ...trends, fetchTrends }}>
             {children}
         </TrendsContext.Provider>
     );

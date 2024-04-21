@@ -4,7 +4,6 @@ import React from "react";
 import { useTrends } from "../contexts/trendsContext";
 
 const TrendsPage = () => {
-    const { val } = useTrends();
     return (
         <Grid container spacing={2}>
             {console.log(useTrends().data)}
@@ -19,7 +18,6 @@ const TrendsPage = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography variant="h6">Trends will be displayed here</Typography>
-                        <p>{val}</p>
                         {/* {useTrends().data.map((trend) => {
                             return (
                                 <div key={trend.tweet_count}>
