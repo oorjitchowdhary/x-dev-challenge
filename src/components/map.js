@@ -17,7 +17,7 @@ const Map = () => {
                     key={city}
                     center={latlng}
                     pathOptions={{ color: 'red' }}
-                    radius={16093}
+                    radius={8046}
                     eventHandlers={{ click: async () => {
                         console.log("Clicked near", city, "with latlng", latlng, "and woeid", woeids[city]);
                         await fetchTrends(city);

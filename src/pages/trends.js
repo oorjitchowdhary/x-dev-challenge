@@ -26,9 +26,9 @@ const TrendsPage = () => {
                             <Typography variant="h5" style={{ textAlign: "center", padding: "1rem", fontWeight: 'bold' }}>Top 10 trends in {city}</Typography>
                         {data ? data.slice(0, 10).map((trend) => {
                             return (
-                                <div key={trend.tweet_count} style={{ width: '20%', margin: 'auto' }}>
-                                    <Typography onClick={handleClick} variant="h6">{trend.trend_name}</Typography>
-                                    <Typography variant="body1">{trend.tweet_count ? trend.tweet_count : "Few"} tweets</Typography>
+                                <div key={trend.tweet_count} style={{ width: '20%', margin: 'auto', cursor: 'pointer' }}>
+                                    <Typography style={{ color: 'blue', textDecoration: 'underline' }} onClick={handleClick} variant="h6">{trend.trend_name}</Typography>
+                                    <Typography variant="body1">{trend.tweet_count ? trend.tweet_count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "Few"} tweets</Typography>
                                 </div>
                             );
                         }) : <Typography variant="h6">Loading...</Typography>}
