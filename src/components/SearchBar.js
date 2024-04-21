@@ -5,8 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-import cities from './cities'; // Import the cities object
-
+import woeids from "../utils/woeid";
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
@@ -25,7 +24,7 @@ const SearchBar = ({ onSearch }) => {
     // Check if the length of the query is at least 2 characters
     if (value.length >= 2) {
       // Filter cities based on the current query
-      const filteredCities = Object.entries(cities).filter(([cityName, _]) =>
+      const filteredCities = Object.entries(woeids).filter(([cityName, _]) =>
         cityName.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filteredCities);
@@ -43,7 +42,7 @@ const SearchBar = ({ onSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Since we're using the city name directly, we need to find the WOEID based on the city name
-    const woeid = cities[query];
+    const woeid = woeids[query];
     onSearch(woeid);
     setQuery('');
     setSuggestions([]);

@@ -1,4 +1,4 @@
-const cities = {
+const woeids = {
     "New York, New York": 2459115,
     "Los Angeles, California": 2442047,
     "Chicago, Illinois": 2379574,
@@ -101,4 +101,4 @@ const cities = {
     "Boise, Idaho": 2366355
 };
 
-export default cities;
+export default woeids;
