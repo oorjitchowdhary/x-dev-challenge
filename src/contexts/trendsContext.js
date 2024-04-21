@@ -22,7 +22,7 @@ export const TrendsProvider = ({ children }) => {
     const fetchSentiments = async (trend) => {
         setTrend(trend);
         console.log("Getting sentiments for", trend);
-        await fetch(`http://127.0.0.1:5000/api/sentiments?query=${trend}`)
+        await fetch(`http://127.0.0.1:5000/api/sentiments?query=${trend.replace('#', '%23')}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
