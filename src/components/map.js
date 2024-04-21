@@ -8,7 +8,7 @@ import { useTrends } from "../contexts/trendsContext";
 const Map = () => {
     const { fetchTrends } = useTrends();
     return (
-        <MapContainer center={[37.8, -96]} zoom={4} style={{ height: "50vh", width: "100vh", cursor: 'pointer', margin: '0 auto' }} scrollWheelZoom={false}>
+        <MapContainer center={[37.8, -96]} zoom={4} style={{ height: "50vh", width: "65%", cursor: 'pointer', margin: '0 auto', borderRadius: '6px', zIndex: 990 }} scrollWheelZoom={false}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
@@ -17,10 +17,10 @@ const Map = () => {
                     key={city}
                     center={latlng}
                     pathOptions={{ color: 'red' }}
-                    radius={100000}
+                    radius={16093}
                     eventHandlers={{ click: async () => {
                         console.log("Clicked near", city, "with latlng", latlng, "and woeid", woeids[city]);
-                        await fetchTrends(woeids[city]);
+                        await fetchTrends(city);
                     }}}
                 />;
             })}

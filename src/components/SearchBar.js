@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import woeids from "../utils/woeid";
+import { useTrends } from '../contexts/trendsContext';
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   '&:hover': {
@@ -16,22 +17,13 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-
-  const getTrends = async (woeid) => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/trends?query=${woeid}`);
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error('Error searching:', error);
-    }
-  };
+  const { fetchTrends } = useTrends();
 
   const handleChange = (event) => {
     const { value } = event.target;
     setQuery(value);
 
-    if (value.length >= 2) {
+    if (value.length >= 3) {
       const filteredCities = Object.entries(woeids).filter(([cityName, _]) =>
         cityName.toLowerCase().includes(value.toLowerCase())
       );
@@ -44,19 +36,18 @@ const SearchBar = () => {
   const handleCityClick = (cityName, woeid) => {
     setQuery(cityName);
     setSuggestions([]);
-    getTrends(woeid);
+    fetchTrends(cityName);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const woeid = woeids[query];
-    getTrends(woeid);
+    fetchTrends(query);
     setQuery('');
     setSuggestions([]);
   };
 
   return (
-    <Box position="absolute" top={20} left="30%" transform="translateX(-50%)" zIndex={999}>
+    <Box width="65%" margin="0 auto" zIndex={999}>
       <form onSubmit={handleSubmit}>
         <TextField
           type="text"
@@ -70,7 +61,7 @@ const SearchBar = () => {
             sx: {
               borderRadius: '20px',
               backgroundColor: '#f3f3f3',
-              width: '40vw'
+              width: '100%'
             },
             style: {
               padding: '4px',
@@ -81,9 +72,9 @@ const SearchBar = () => {
       {suggestions.length > 0 && (
         <Paper
           elevation={3}
+          style={{ zIndex: 999, position: 'absolute'}}
           sx={{
             marginTop: '8px',
-            width: '100%',
             borderRadius: '10px',
             overflow: 'hidden',
             backgroundColor: '#f9f9f9',

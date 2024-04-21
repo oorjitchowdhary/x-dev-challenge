@@ -19,7 +19,7 @@ class SearchPage extends Component {
                         </AccordionSummary>
                         <AccordionDetails>
                             <SearchBar />
-                            <br />
+                            <Typography align='center' variant='h6' style={{ fontWeight: 'bold' }}>or</Typography>
                             <Map />
                         </AccordionDetails>
                     </Accordion>
