@@ -4,8 +4,15 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-
 import woeids from "../utils/woeid";
+
+const getTrends = async (woeid) => {
+  await fetch('http://localhost:5000/api/trends?query=' + woeid)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error searching:', error));
+};
+
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
@@ -13,7 +20,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
@@ -36,14 +43,14 @@ const SearchBar = ({ onSearch }) => {
   const handleCityClick = (cityName, woeid) => {
     setQuery(cityName); // Set the city name in the input field
     setSuggestions([]);
-    onSearch(woeid);
+    getTrends(woeid);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Since we're using the city name directly, we need to find the WOEID based on the city name
     const woeid = woeids[query];
-    onSearch(woeid);
+    getTrends(woeid);
     setQuery('');
     setSuggestions([]);
   };
