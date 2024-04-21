@@ -73,7 +73,7 @@ const SearchBar = () => {
               width: '40vw'
             },
             style: {
-              padding: '10px',
+              padding: '4px',
             },
           }}
         />

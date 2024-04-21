@@ -3,7 +3,7 @@ import React from "react";
 export const TrendsContext = React.createContext();
 
 export const TrendsProvider = ({ children }) => {
-    const [trends, setTrends] = React.useState([]);
+    const [trends, setTrends] = React.useState([{ trend_name: "Loading...", tweet_count: 0 }]);
 
     const fetchTrends = async (woeid) => {
         await fetch(`http://127.0.0.1:5000/api/trends?query=${woeid}`)
