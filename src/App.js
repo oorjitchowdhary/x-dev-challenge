@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import IndexPage from './pages/index';
+import React from 'react';
 import SearchPage from './pages/search';
+import TrendsPage from './pages/trends';
+import SentimentsPage from './pages/sentiments';
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('search'); // ['search', 'trends', 'sentiment']
-
   return (
-      <div className='App'>
-        <SearchPage />
-        <IndexPage />
-      </div>
+    <>
+      <SearchPage />
+      <TrendsPage />
+      <SentimentsPage />
+    </>
   );
 };
 

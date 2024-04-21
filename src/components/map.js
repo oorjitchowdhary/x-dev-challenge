@@ -8,7 +8,7 @@ const handleCircleClick = async (city, latlng) => {
     console.log(city, latlng);
     console.log(woeids[city]);
 
-    await fetch(`http://localhost:5000/api/trends?query=${woeids[city]}`)
+    await fetch(`http://127.0.0.1:5000/api/trends?query=${woeids[city]}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data);
@@ -36,7 +36,7 @@ const Map = () => {
     };
 
     return (
-        <MapContainer center={[37.8, -96]} zoom={4} style={{ height: "50vh", width: "100vh", cursor: 'pointer' }} scrollWheelZoom={false}>
+        <MapContainer center={[37.8, -96]} zoom={4} style={{ height: "50vh", width: "100vh", cursor: 'pointer', margin: '0 auto' }} scrollWheelZoom={false}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />

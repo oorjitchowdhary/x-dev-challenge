@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import woeids from "../utils/woeid";
 
 const getTrends = async (woeid) => {
-  await fetch('http://localhost:5000/api/trends?query=' + woeid)
+  await fetch('http://127.0.0.1:5000/api/trends?query=' + woeid)
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error searching:', error));
